@@ -1,9 +1,9 @@
 {
-  "name": "scroll-to",
-  "repo": "component/scroll-to",
-  "description": "Smooth window scroll to position with requestAnimationFrame",
+  "name": "animate-property",
+  "repo": "optimuslime/animate-property",
+  "description": "Smooth property aimations with requestAnimationFrame",
   "version": "0.0.1",
-  "keywords": ["scroll", "animate", "scroll-to"],
+  "keywords": ["animate", "properties", "animate-property"],
   "dependencies": {
     "component/raf": "1.0.0",
     "component/tween": "1.0.0"
