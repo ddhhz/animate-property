@@ -1,12 +1,12 @@
 {
-  "name": "scroll-to",
-  "repo": "component/scroll-to",
-  "description": "Smooth window scroll to position with requestAnimationFrame",
+  "name": "animate-property",
+  "repo": "animate-property",
+  "description": "Smooth property animations with requestAnimationFrame",
   "version": "0.0.1",
   "keywords": [
-    "scroll",
+    "property",
     "animate",
-    "scroll-to"
+    "animate-property"
   ],
   "dependencies": {
     "raf-component": "1.0.0",
@@ -16,11 +16,11 @@
   "main": "index.js",
   "component": {
     "scripts": {
-      "scroll-to/index.js": "index.js"
+      "animate-property/index.js": "index.js"
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/component/scroll-to.git"
+    "url": "https://github.com/optimuslime/animate-property.git"
   }
 }
