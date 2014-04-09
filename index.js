@@ -6,34 +6,48 @@ var Tween = require('tween');
 var raf = require('raf');
 
 /**
- * Expose `scrollTo`.
+ * Expose `animateProperty`.
  */
 
-module.exports = scrollTo;
+module.exports = animateProperty;
 
 /**
- * Scroll to `(x, y)`.
+ * Animate properties of a given element.
  *
  * @param {Number} x
  * @param {Number} y
  * @api public
  */
 
-function scrollTo(x, y, options) {
+function animateProperty(el, props, options) {
   options = options || {};
 
   // start position
-  var start = scroll();
+  var start = initial(el, props);
 
   // setup tween
   var tween = Tween(start)
     .ease(options.ease || 'out-circ')
-    .to({ top: y, left: x })
+    .to(props)
     .duration(options.duration || 1000);
 
-  // scroll
+  // animate
   tween.update(function(o){
-    window.scrollTo(o.left | 0, o.top | 0);
+    for(var key in o)
+    {
+      //don't set something that was never defined in the first place
+      if(el[key] != undefined)
+        el[key] = o[key];
+      else if(el.setAttribute) { //if it is undefined, we check for setAttribute
+        el.setAttribute(key, o[key]);
+      }
+      else {
+        //uh oh -- don't know about this case -- maybe we'll just set it to be safe
+        el[key] = o[key];
+        //note that the order of if/else operations is important,
+        //that's why we don't just set el[key] = o[key] in the first place
+      }
+    }
   });
 
   // handle end
@@ -53,14 +67,23 @@ function scrollTo(x, y, options) {
 }
 
 /**
- * Return scroll position.
+ * Return intitial values.
  *
  * @return {Object}
  * @api private
  */
 
-function scroll() {
-  var y = window.pageYOffset || document.documentElement.scrollTop;
-  var x = window.pageXOffset || document.documentElement.scrollLeft;
-  return { top: y, left: x };
+function initial(el, props) {
+  //check properties -- we want the intial value
+  var initial = {};
+  for(var key in props)
+  {
+    var pVal = el[key];
+    if(pVal == undefined && el.getAttribute)
+      pVal = el.getAttribute(key);
+      
+    pVal = pVal || 0;
+    initial[key] = pVal;
+  }
+  return initial;
 }
