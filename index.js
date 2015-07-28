@@ -2,8 +2,8 @@
  * Module dependencies.
  */
 
-var Tween = require('tween-component');
-var raf = require('raf-component');
+var Tween = require('tween');
+var raf = require('raf');
 
 /**
  * Expose `animateProperty`.
